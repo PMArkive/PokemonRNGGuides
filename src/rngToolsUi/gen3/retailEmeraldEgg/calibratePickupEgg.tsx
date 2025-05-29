@@ -1,5 +1,11 @@
 import React from "react";
-import { Flex, ResultColumn, RngToolForm, Typography } from "~/components";
+import {
+  Flex,
+  ResultColumn,
+  RngToolForm,
+  Typography,
+  CalibrateTimerButton,
+} from "~/components";
 import { PickupEggState, useHeldEggState, usePickupEggState } from "./state";
 import { rngTools, StatsValue, Gen3PickupMethod } from "~/rngTools";
 import { maxIvs, minIvs } from "~/types/ivs";
@@ -13,7 +19,6 @@ import pmap from "p-map";
 import { sortBy, startCase } from "lodash-es";
 import { createGen3TimerAtom } from "~/hooks/useGen3Timer";
 import { ivMethods } from "./constants";
-import { CalibrateButton } from "./calibrateButton";
 import { Gen3Timer } from "~/components/gen3Timer";
 
 const timerAtom = createGen3TimerAtom();
@@ -40,7 +45,12 @@ const columns: ResultColumn<Result>[] = [
     title: "Calibrate",
     dataIndex: "advance",
     render: (_, result) => (
-      <CalibrateButton hitAdvance={result.advance} timer={timerAtom} />
+      <CalibrateTimerButton
+        type="gen3"
+        hitAdvance={result.advance}
+        timer={timerAtom}
+        trackerId="calibrate_retail_emerald_pickup_egg"
+      />
     ),
   },
   {
